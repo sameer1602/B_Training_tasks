@@ -159,3 +159,78 @@ insert into employee (emp_id,designation,person_id,customer_id ) values(1, 'Asst
 	
 	insert into task(task_id,task_name,task_desc,task_status,start_date,expected_end_date,actual_end_date,assigned_by,module_id,module_name,emp_id) 
 	values(1, 'Installation', 'Installing new broadband','completed', '2021-07-26' ,'2021-08-30','2021-09-01', 'admin1', 011, 'INSTALL', '1');				
+
+
+
+Select lead.lead_id ,lead.created_at, lead.person_id, opportunity.opportunity_id, opportunity.plan_id
+	from lead
+	inner join opportunity on  opportunity.lead_id =lead.lead_id ;
+	
+	select le.lead_id ,le.created_at, le.person_id, opp.opportunity_id, opp.plan_id
+	from lead le
+	join opportunity opp on  opp.lead_id =le.lead_id ;
+	
+	select le.lead_id ,le.created_at, le.person_id, opp.opportunity_id, opp.plan_id
+	from lead le join opportunity opp using(lead_id) ;
+
+
+
+
+select le.lead_id ,le.created_at, le.person_id, cus.customer_id, opp.opportunity_id
+	from lead le
+	join opportunity opp ON opp.lead_id = le.lead_id
+	join customer cus ON cus.opportunity_id = opp.opportunity_id;
+	
+	
+	select le.lead_id ,le.created_at, le.person_id, cus.customer_id, opp.opportunity_id
+from lead le
+join opportunity opp ON opp.lead_id = le.lead_id
+join customer cus ON cus.opportunity_id = opp.opportunity_id;
+
+
+select count(task_id) from task group by module_id;
+
+
+select * from task;
+
+
+select cus.customer_id , pe.person_id, pe.contact_no, pe.first_name
+	from customer cus 
+	join opportunity opp ON opp.opportunity_id = cus.opportunity_id
+	join lead le ON  le.lead_id = opp.lead_id
+	join person pe ON  pe.person_id=  le.person_id
+	where pe.contact_no = 0;
+
+
+select * from task where start_date != current_date;
+
+select * from task where task_status = 'completed';
+
+
+select * from task where start_date > current_date;
+
+
+select cus.customer_id , cus.ac_details, pe.contact_no, pe.first_name
+	from customer cus 
+	join opportunity opp ON opp.opportunity_id = cus.opportunity_id
+	join lead le ON  le.lead_id = opp.lead_id
+	join person pe ON  pe.person_id=  le.person_id;
+
+
+
+
+select count(le.lead_id) 
+from lead le
+join opportunity opp ON opp.lead_id = le.lead_id
+join customer cus ON cus.opportunity_id = opp.opportunity_id;
+
+select * from opportunity;
+
+select  cus.customer_id, opp.opportunity_id, cus.cust_username
+	from opportunity opp
+	join customer cus ON cus.opportunity_id = opp.opportunity_id;
+
+
+
+select count(plan_id) from customer group by plan_id;
+
