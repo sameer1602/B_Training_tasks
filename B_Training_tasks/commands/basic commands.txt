@@ -1,2 +1,0 @@
-git clone --- It will create a working copy of a local repository.
-git init---Create a new local repository
